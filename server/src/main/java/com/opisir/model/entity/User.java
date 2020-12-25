@@ -1,5 +1,6 @@
 package com.opisir.model.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Fetch;
@@ -16,6 +17,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
