@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class LoginResp {
-
     private String accessToken;
     private String refreshToken;
+
 }

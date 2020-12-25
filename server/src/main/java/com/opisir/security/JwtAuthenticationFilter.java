@@ -1,6 +1,5 @@
 package com.opisir.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opisir.config.AppProperties;
 import com.opisir.model.entity.User;
 import com.opisir.repository.UserRepo;
@@ -18,7 +17,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * @Auther: dingjn
@@ -43,9 +41,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (StringUtils.isNotBlank(token) && token.startsWith(appProperties.getJwt().getPrefix())) {
             token = request.getHeader(appProperties.getJwt().getHeader()).replace(appProperties.getJwt().getPrefix(), "");//提取真实jwt
             String username = tokenUtil.getUsernameFromToken(token);//从jwt提取用户
-//            if (username == null) {
-//                returnJson(response, JsonResult.FAIL(ResultCode.AUTH_401, "token无效，重新登录"));
-//            }
             if (StringUtils.isNotBlank(username) && SecurityContextHolder.getContext().getAuthentication() == null) {
                 User user = userRepo.findByUsername(username);
                 if (user != null && tokenUtil.validateToken(token, user)) {
@@ -56,24 +51,5 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         }
         filterChain.doFilter(request, response);
-    }
-
-    protected void returnJson(HttpServletResponse response,
-                              Object data) {
-        //将实体对象转换为JSON Object转换
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json; charset=utf-8");
-        PrintWriter out = null;
-        try {
-            out = response.getWriter();
-            out.print(new ObjectMapper().writeValueAsString(data));
-            out.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (out != null) {
-                out.close();
-            }
-        }
     }
 }

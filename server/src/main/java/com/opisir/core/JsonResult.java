@@ -2,10 +2,8 @@ package com.opisir.core;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
 
 /**
  * @Auther: dingjn

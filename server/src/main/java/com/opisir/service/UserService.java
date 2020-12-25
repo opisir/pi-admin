@@ -6,7 +6,6 @@ import com.opisir.model.req.LoginReq;
 import com.opisir.model.res.LoginResp;
 import com.opisir.repository.UserRepo;
 import com.opisir.utils.TokenUtil;
-import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.DisabledException;
