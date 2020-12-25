@@ -42,13 +42,13 @@ public class ApiAspect {
             user = new User(0, "", "未登录", true, null);
         }
         log.info("################ api日志开始 ################");
-        log.info("【请求用户】 id={}, phone={} : ", user.getId(), user.getUsername());
+        log.info("【请求用户】 id={}, username={} : ", user.getId(), user.getUsername());
         log.info("【请求URL】 : " + request.getRequestURL().toString());
         log.info("【请求方式】 : " + request.getMethod());
         log.info("【请求IP】 : " + request.getRemoteAddr() + " , nginx配置的ip：" + request.getHeader("X-REAL-IP"));
         Object[] args = call.getArgs();
         if (args != null) {
-            StringBuilder sb = new StringBuilder("userId=" + user.getId() + "|");
+            StringBuilder sb = new StringBuilder();
             for (Object arg : args) {
                 if (arg instanceof HttpServletRequest) {
                     continue;
